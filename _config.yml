@@ -3,8 +3,12 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
-
+#highlighter: pygments
+# Conversion
+    markdown:    kramdown
+    highlighter: rouge
+    lsi:         false
+    excerpt_separator: "\n\n"
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
@@ -127,8 +131,35 @@ JB :
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
   # Build settings
-  markdown: redcarpet
-  safe: false
-  pygments: true
-  excerpt_separator: "\n\n\n"
-  paginate: 5
+ 
+ 
+  # Markdown Processors
+    maruku:
+      use_tex:    false
+      use_divs:   false
+      png_engine: blahtex
+      png_dir:    images/latex
+      png_url:    /images/latex
+      fenced_code_blocks: true
+    
+    rdiscount:
+      extensions: []
+    
+    redcarpet:
+      extensions: []
+    
+    kramdown:
+      auto_ids:       true
+      footnote_nr:    1
+      entity_output:  as_char
+      toc_levels:     1..6
+      smart_quotes:   lsquo,rsquo,ldquo,rdquo
+      enable_coderay: false
+    
+      coderay:
+        coderay_wrap:              div
+        coderay_line_numbers:      inline
+        coderay_line_number_start: 1
+        coderay_tab_width:         4
+        coderay_bold_every:        10
+        coderay_css:               style
