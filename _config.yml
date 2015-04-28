@@ -3,17 +3,13 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-#highlighter: pygments
-# Conversion
-    markdown:    kramdown
-    highlighter: rouge
-    lsi:         false
-    excerpt_separator: "\n\n"
+highlighter: pygments
+
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
 title : fly1988happy
-tagline: Site Tagline
+tagline: Day Day Up
 author :
   name : fly1988happy
   email : fly1988.happy@163.com
