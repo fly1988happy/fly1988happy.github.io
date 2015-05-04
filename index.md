@@ -5,7 +5,6 @@ tagline: day day up
 ---
 {% include JB/setup %}
 
-###Here's my learning 
 
 <ul class="posts">
   {% for post in site.posts %}
