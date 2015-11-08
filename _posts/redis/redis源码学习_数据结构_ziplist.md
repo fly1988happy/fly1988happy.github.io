@@ -1,3 +1,9 @@
+---
+layout: post
+category : redis
+tagline: "redis"
+tags : [redis]
+---
 # 压缩列表ziplist
 ##ziplist结构
 ```
