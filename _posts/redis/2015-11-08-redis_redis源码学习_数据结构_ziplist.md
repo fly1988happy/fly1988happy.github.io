@@ -11,13 +11,19 @@ tags : [redis]
 4B       |   4B   |    2B |                 |  1B
 |<------header----------->|  
 ```
+
 zlbytes： 存储整个压缩列表所占字节数，4B(unsigned int)
+
 zltail: 存储压缩列表尾节点相对于首地址的偏移量， 4B(unsigned int)
+
 zllen：存储压缩列表中节点数目，2B(unsigned int)，最长2^16-2，当节点数目大于此值，需要遍历所有节点才能得到节点数
+
 entry: 压缩列表节点，节点大小根据存储的内容确定
+
 zlend： 压缩列表结尾符，值为255，1B(unsigned int)
 
 ##entry结构
+
 ```
 typedef struct zlentry{
 	unsigned int   prevrawlensize, prevrawlen;
@@ -30,6 +36,7 @@ typedef struct zlentry{
 	unsigned char  *p;
 }
 ```
+
 
 ```
 |前一个节点的编码&长度    |当前节点编码&长度     |当前节点内容|
@@ -58,7 +65,9 @@ typedef struct zlentry{
  - 1111 1110 —— >1字节 ——> 8bit 有符号整数
  - 1111 xxxx ——> 1字节 ——> 4bit无符号整数，0~12，不需要content字段
 
+
 `定义压缩列表节点的encoding值`
+
 ```
 /* Different encoding/length possibilities */定义不同的encoding
 //str
@@ -70,7 +79,9 @@ typedef struct zlentry{
 #define ZIP_INT_32B (0xc0 | 1<<4)
 #define ZIP_INT_64B (0xc0 | 2<<4)
 ```
+
 `计算数据类型`
+
 ```
 /* Macro's to determine type */计算encoding对应的数据类型，str 或 int
 //将上面的宏带入enc，得到true或false。
@@ -78,6 +89,7 @@ typedef struct zlentry{
 #define ZIP_IS_INT(enc) (!ZIP_IS_STR(enc) && ((enc) & 0x30) < 0x30)
 
 ```
+
 ##ziplist应用
 ###创建空的ziplist
 ```
