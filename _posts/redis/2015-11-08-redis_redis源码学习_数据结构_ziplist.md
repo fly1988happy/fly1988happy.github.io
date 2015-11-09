@@ -5,6 +5,20 @@ tagline: "redis"
 tags : [redis]
 ---
 # 压缩列表ziplist
+##ziplist简介
+
+ - 压缩列表是由一系列 `特殊编码的` `连续内存块` 组成的 `顺序型` 存储结构。主要是为了`节省内存空间`而设计的数据结构。
+ - 压缩列表可以用来存储字符串或整数。
+ - 压缩列表存储的数据特点： 数据量比较小，并且每项数据要么是比较小的整数，要么是比较短的字符串。
+ - redis中的 列表list，哈希表hashtable，有序集合sorted set 的底层实现中都用到了ziplist。
+ - 对于用户来说，其实不用关心什么时候用ziplist，redis底层会根据数据量多少以及每项数据大小，判断是否采用ziplist结构存储数据（当数据量超过限定值时，会传化成其他的数据结构）。
+
+```
+//redis.conf文件
+list-max-ziplist-entries 512 //ziplist中entry个数
+list-max-ziplist-value 64 //每个entry所占的字节大小
+```
+
 ##ziplist结构
 ```
 <zlbytes>|<zltail>|<zllen>|<entry>...<entry>|<zlend>
